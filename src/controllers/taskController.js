@@ -41,6 +41,7 @@ exports.updateTask = async (req, res) => {
     if (req.body.title !== undefined) updates.title = req.body.title;
     if (req.body.description !== undefined) updates.description = req.body.description;
     if (req.body.completed !== undefined) updates.completed = req.body.completed;
+    if (req.body.priority !== undefined) updates.priority = req.body.priority;
 
     await task.update(updates);
 
