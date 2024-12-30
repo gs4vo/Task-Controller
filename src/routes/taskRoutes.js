@@ -12,7 +12,8 @@ const {
   getRecentlyUpdatedTasks,
   getTaskCount,
   getCompletedTaskCount,
-  getPendingTaskCount
+  getPendingTaskCount,
+  getTasksByPriority
 } = require("../controllers/taskController");
 
 const router = express.Router();
@@ -30,5 +31,8 @@ router.get("/updated-recently", getRecentlyUpdatedTasks);
 router.get("/count", getTaskCount);
 router.get("/completed-count", getCompletedTaskCount);
 router.get("/pending-count", getPendingTaskCount);
+router.get("/tasks/priority/:priority", getTasksByPriority);
+
+
 
 module.exports = router;

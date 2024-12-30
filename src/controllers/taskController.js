@@ -33,11 +33,10 @@ exports.getTaskById = async (req, res) => {
 
 exports.updateTask = async (req, res) => {
   try {
-    const task = await Task.findByPk(req.params.id); // Encontra a tarefa pelo ID
+    const task = await Task.findByPk(req.params.id);
     if (!task) {
       return res.status(404).json({ message: "Tarefa não encontrada!" });
     }
-
     const updates = {};
     if (req.body.title !== undefined) updates.title = req.body.title;
     if (req.body.description !== undefined) updates.description = req.body.description;
@@ -160,4 +159,27 @@ exports.getPendingTaskCount = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+
+
 };
+exports.getTasksByPriority = async (req, res) => {
+  const { priority } = req.params;
+
+  try {
+    const tasks = await Task.findAll({
+      where: { priority }
+    });
+
+
+    if (tasks.length === 0) {
+      return res.status(404).json({ message: "Nenhuma tarefa com a prioridade informada foi encontrada!" });
+    }
+
+    res.status(200).json(tasks);
+
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+
+};
+

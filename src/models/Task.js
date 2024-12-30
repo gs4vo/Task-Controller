@@ -13,6 +13,14 @@ const Task = sequelize.define("Task", {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   },
+  priority: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: "Baixa",
+    validate: {
+      isIn: [["Baixa", "Média", "Alta"]],
+    },
+  },
 }, {
   tableName: "tasks",
   timestamps: true,
